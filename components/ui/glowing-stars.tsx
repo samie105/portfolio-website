@@ -55,7 +55,10 @@ export const GlowingStarsTitle = ({
   );
 };
 
-export const Illustration = ({ mouseEnter }: { mouseEnter: boolean }) => {
+export const Illustration = ({ 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  mouseEnter 
+}: { mouseEnter: boolean }) => {
 const codeString = `// 🚀 Welcome to my digital playground!
 
 const developer = {

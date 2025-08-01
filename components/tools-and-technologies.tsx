@@ -2,12 +2,10 @@
 import React from "react";
 import { motion } from "motion/react";
 import dynamic from "next/dynamic";
-import { Grid3x2, LayoutGrid, Sparkle, SparkleIcon } from "lucide-react";
+import { Sparkle } from "lucide-react";
 import { GlowingStarsBackgroundCard } from "@/components/ui/glowing-stars";
-import { useTheme } from "next-themes";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { usePageTransition } from "@/hooks/use-page-transition";
-import Link from "next/link";
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,

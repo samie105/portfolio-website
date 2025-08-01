@@ -3,8 +3,7 @@
 import { motion } from "motion/react";
 import { 
   Sparkles,
-  ArrowDown,
-  Play
+  ArrowDown
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
@@ -75,7 +74,7 @@ export default function ProjectsHero() {
             size="lg"
             className="px-8 py-4 text-lg font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
           >
-            Let's Dive in
+            Let&apos;s Dive in
             <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
           </Button>
         </motion.div>

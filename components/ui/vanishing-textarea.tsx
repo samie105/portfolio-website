@@ -29,14 +29,16 @@ export function VanishingTextarea({
 }: VanishingTextareaProps) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const [animating, setAnimating] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAnimatingIn, setIsAnimatingIn] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const newDataRef = useRef<any[]>([]);
 
-  const startAnimation = () => {
+  const startAnimation = useCallback(() => {
     // Clear any existing timeouts
     if (animationTimeoutRef.current) {
       clearTimeout(animationTimeoutRef.current);
@@ -60,9 +62,9 @@ export function VanishingTextarea({
       setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
       startAnimation(); // Recursively start next animation
     }, totalAnimationTime);
-  };
+  }, [placeholders, currentPlaceholder]);
 
-  const handleVisibilityChange = () => {
+  const handleVisibilityChange = useCallback(() => {
     if (document.visibilityState !== "visible") {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -75,7 +77,7 @@ export function VanishingTextarea({
     } else if (document.visibilityState === "visible") {
       startAnimation();
     }
-  };
+  }, [startAnimation]);
 
   useEffect(() => {
     startAnimation();
@@ -90,7 +92,7 @@ export function VanishingTextarea({
       }
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [placeholders]);
+  }, [placeholders, handleVisibilityChange, startAnimation]);
 
   const draw = useCallback(() => {
     if (!textareaRef.current) return;
@@ -116,12 +118,13 @@ export function VanishingTextarea({
 
     const imageData = ctx.getImageData(0, 0, 600, 200);
     const pixelData = imageData.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newData: any[] = [];
 
     for (let t = 0; t < 200; t++) {
-      let i = 4 * t * 600;
+      const i = 4 * t * 600;
       for (let n = 0; n < 600; n++) {
-        let e = i + 4 * n;
+        const e = i + 4 * n;
         if (
           pixelData[e] !== 0 &&
           pixelData[e + 1] !== 0 &&

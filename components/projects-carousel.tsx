@@ -3,7 +3,7 @@
 import React from "react";
 import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Calendar, Users, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 const projectsData = [
   {
@@ -312,6 +312,7 @@ const projectsData = [
   }
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProjectDetailContent = ({ detail }: { detail: any }) => {
   return (
     <div className="bg-muted/30 p-8 md:p-14 rounded-3xl mb-4">

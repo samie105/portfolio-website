@@ -99,7 +99,7 @@ export default function AboutSection() {
                 <div className="w-16 h-16 bg-primary rounded-2xl mx-auto mb-4 flex items-center justify-center">
                   <span className="text-2xl">🤝</span>
                 </div>
-                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Let's Connect</h3>
+                <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2">Let&apos;s Connect</h3>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">Ready to collaborate and build something amazing together</p>
               </div>
             </div>

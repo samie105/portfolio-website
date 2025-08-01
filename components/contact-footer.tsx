@@ -7,10 +7,8 @@ import { Label } from "@/components/ui/label";
 import { 
   Heart,
   Mail,
-  Phone,
   MessageCircle,
   Instagram,
-  ArrowRight,
   Sparkles,
   Send
 } from "lucide-react";
@@ -142,7 +140,7 @@ export default function ContactFooter() {
               >
             <div className="inline-flex items-center gap-2 rounded-full bg-muted/50 px-4 py-2 text-sm text-muted-foreground mb-6">
               <Sparkles className="w-4 h-4" />
-              Let's Connect
+              Let&apos;s Connect
             </div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
@@ -150,8 +148,8 @@ export default function ContactFooter() {
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's bring your ideas to life! Whether it's a stunning website, a powerful web app, 
-              or something completely custom – I'm here to make it happen.
+              Let&apos;s bring your ideas to life! Whether it&apos;s a stunning website, a powerful web app, 
+              or something completely custom – I&apos;m here to make it happen.
             </p>
 
             <motion.div
@@ -202,7 +200,7 @@ export default function ContactFooter() {
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold mb-3">Send me a message</h3>
                 <p className="text-muted-foreground">
-                  Got a project in mind? Let's start the conversation.
+                  Got a project in mind? Let&apos;s start the conversation.
                 </p>
               </div>
 

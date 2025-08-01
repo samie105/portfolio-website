@@ -91,7 +91,9 @@ export default function PortfolioSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
         >
-          {portfolioData.stats.map((stat, index) => (
+          {portfolioData.stats.map((stat, 
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            index) => (
             <div
               key={stat.label}
               className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 text-center hover:border-primary/30 transition-all duration-300 group"
@@ -125,7 +127,9 @@ export default function PortfolioSection() {
               </div>
               
               <div className="space-y-6">
-                {portfolioData.projects.map((project, index) => (
+                {portfolioData.projects.map((project, 
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  index) => (
                   <div
                     key={project.title}
                     className="group p-6 rounded-2xl border border-border/30 hover:border-primary/30 transition-all duration-300 hover:bg-muted/20"
@@ -253,7 +257,7 @@ export default function PortfolioSection() {
               Ready to Build Something Amazing?
             </h3>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Let's collaborate on your next project and create digital experiences that make a difference.
+              Let&apos;s collaborate on your next project and create digital experiences that make a difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="rounded-full px-8">

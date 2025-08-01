@@ -68,10 +68,16 @@ interface WorldProps {
   data: Position[];
 }
 
-let numbersOfRings = [0];
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const numbersOfRings = [0];
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const rgb = (r: number, g: number, b: number) => `rgb(${r}, ${g}, ${b})`;
 
 export function Globe({ globeConfig, data }: WorldProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const globeRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const groupRef = useRef<any>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -96,6 +102,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
   useEffect(() => {
     if (!globeRef.current && groupRef.current) {
       globeRef.current = new ThreeGlobe();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (groupRef.current as any).add(globeRef.current);
       setIsInitialized(true);
     }
@@ -106,7 +113,9 @@ export function Globe({ globeConfig, data }: WorldProps) {
     if (!globeRef.current || !isInitialized) return;
 
     const globeMaterial = globeRef.current.globeMaterial() as unknown as {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       color: any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       emissive: any;
       emissiveIntensity: number;
       shininess: number;
@@ -128,10 +137,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
     if (!globeRef.current || !isInitialized || !data) return;
 
     const arcs = data;
-    let points = [];
+    const points = [];
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
-      const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const rgbColor = hexToRgb(arc.color) as { r: number; g: number; b: number };
       points.push({
         size: defaultProps.pointSize,
         order: arc.order,
@@ -169,20 +179,28 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
     globeRef.current
       .arcsData(data)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcStartLat((d: any) => (d as { startLat: number }).startLat * 1)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcStartLng((d: any) => (d as { startLng: number }).startLng * 1)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcEndLat((d: any) => (d as { endLat: number }).endLat * 1)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcEndLng((d: any) => (d as { endLng: number }).endLng * 1)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcColor((e: any) => (e as { color: string }).color)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcAltitude((e: any) => (e as { arcAlt: number }).arcAlt * 1)
       .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
       .arcDashLength(defaultProps.arcLength)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .arcDashInitialGap((e: any) => (e as { order: number }).order * 1)
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     globeRef.current
       .pointsData(filteredPoints)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .pointColor((e: any) => (e as { color: string }).color)
       .pointsMerge(true)
       .pointAltitude(0.0)
@@ -292,12 +310,12 @@ export function World(props: WorldProps) {
 }
 
 export function hexToRgb(hex: string) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
 
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
         r: parseInt(result[1], 16),

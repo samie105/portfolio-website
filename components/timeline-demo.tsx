@@ -5,7 +5,6 @@ import {
   Rocket, 
   Smartphone, 
   Zap, 
-  Settings, 
   Database, 
   Archive, 
   Shield, 

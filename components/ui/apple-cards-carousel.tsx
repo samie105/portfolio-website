@@ -1,19 +1,16 @@
 "use client";
 import React, {
   useEffect,
-  useRef,
   useState,
   createContext,
-  useContext,
 } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
-import Image, { ImageProps } from "next/image";
+import { motion } from "motion/react";
+import { ImageProps } from "next/image";
 import Link from "next/link";
 
 interface CarouselProps {
@@ -155,6 +152,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
 export const Card = ({
   card,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   index,
   layout = false,
 }: {

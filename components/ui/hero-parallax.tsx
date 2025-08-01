@@ -108,6 +108,7 @@ export const HeroParallax = ({
 
 export const Header = () => {
   const roles = ["FullStack Developer", "Product Designer", "Blendy Overthinker"];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const roleIcons = [Code, Palette, Brain];
 
   return (
@@ -120,7 +121,7 @@ export const Header = () => {
       </div>
       
       <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-foreground opacity-100 leading-tight animate-in slide-in-from-bottom-6 duration-1000 delay-300">
-        Hi, I'm Richfield <br /> 
+        Hi, I&apos;m Richfield <br /> 
         <span className="text-primary inline-flex items-center gap-3">
           <FlipWords words={roles} duration={2500} className="text-primary font-bold" />
           <span className="hidden sm:inline-block">

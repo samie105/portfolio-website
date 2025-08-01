@@ -16,22 +16,20 @@ import {
   Moon, 
   Monitor, 
   Palette, 
-  Check,
   Phone,
   Mail,
   MessageCircle,
-  Send,
   Instagram,
   Twitter,
   ArrowRight
 } from "lucide-react";
-import { Arrow } from "@radix-ui/react-popover";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { currentColor, setColor, colors, getDisplayColor } = useColor();
   const pathname = usePathname();
   const { navigateWithTransition } = usePageTransition();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeSection, setActiveSection] = useState("home");
   const [currentHash, setCurrentHash] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,10 +43,11 @@ export default function Navbar() {
     { label: "Contact", id: "contact" }
   ];
 
-  // Projects item for separate button
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const projectsItem = { label: "Projects", id: "projects", href: "/projects" };
 
   // All navigation items for mobile (excludes Projects)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const allNavItems = [
     { label: "Home", id: "home", href: "/" },
     { label: "Tools", id: "tools" },
@@ -143,6 +142,7 @@ export default function Navbar() {
   };
 
   // Handle navigation click
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleNavClick = (item: typeof navItems[0]) => {
     if (item.href) {
       // If it's a route (like /projects), navigate to it

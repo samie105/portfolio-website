@@ -3,7 +3,7 @@ import React from "react";
 import { ThreeDMarquee } from "@/components/ui/3d-marquee";
 import { Button } from "@/components/ui/button";
 import { FlipWords } from "@/components/ui/flip-words";
-import { Sparkles, ArrowRight, Code, Palette, Brain, Grid2X2, LayoutGrid } from "lucide-react";
+import { Sparkles, Code, LayoutGrid } from "lucide-react";
 import { motion } from "motion/react";
 
 export default function Hero3DMarqueeDemo() {
@@ -82,7 +82,7 @@ export default function Hero3DMarqueeDemo() {
           
           {/* Main Heading */}
           <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white leading-tight animate-in slide-in-from-bottom-6 duration-1000 delay-300">
-            Hi, I'm Richfield <br /> 
+            Hi, I&apos;m Richfield <br /> 
             <span className="text-white inline-flex items-center gap-3 justify-center">
               <FlipWords words={roles} duration={2500} className="text-white font-bold" />
               <span className="hidden sm:inline-block">

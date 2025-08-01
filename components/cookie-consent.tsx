@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Cookie, X, Settings, Palette, Monitor } from "lucide-react";
+import { Cookie, Settings, Palette, Monitor } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 export function CookieConsent() {
@@ -75,7 +75,7 @@ export function CookieConsent() {
               {/* Content */}
               <div className="mb-6">
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  We'd like to save your theme and color palette preferences to provide you with a personalized experience on future visits.
+                  We&apos;d like to save your theme and color palette preferences to provide you with a personalized experience on future visits.
                 </p>
 
                 {/* Features List */}
