@@ -64,9 +64,12 @@ export default function Navbar() {
       
       // Handle different navigation types
       if (href === "/projects") {
-        // Use page transition for projects page
-        e.preventDefault();
-        navigateWithTransition("/projects");
+        // Only use page transition when coming from projects page
+        if (pathname === '/projects') {
+          e.preventDefault();
+          navigateWithTransition("/projects");
+        }
+        // When on home page, use normal navigation (no transition)
       }
       else if (href.startsWith('/#') && pathname === '/') {
         e.preventDefault();
@@ -99,8 +102,17 @@ export default function Navbar() {
   // Custom Link component that handles smooth scrolling for hash links
   const SmoothLink = ({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) => {
     const handleClick = (e: React.MouseEvent) => {
+      // Handle navigation to projects page
+      if (href === "/projects") {
+        // Only use page transition when coming from projects page
+        if (pathname === '/projects') {
+          e.preventDefault();
+          navigateWithTransition("/projects");
+        }
+        // When on home page, use normal navigation (no transition)
+      }
       // If it's a hash link and we're on the homepage, smooth scroll instead of navigating
-      if (href.startsWith('/#') && pathname === '/') {
+      else if (href.startsWith('/#') && pathname === '/') {
         e.preventDefault();
         const sectionId = href.slice(2); // Remove /#
         scrollToSection(sectionId);
@@ -324,7 +336,7 @@ export default function Navbar() {
   );
 
   const MenuContent = ({ isMobile = false }: { isMobile?: boolean }) => (
-    <div className={`${isMobile ? 'h-full flex flex-col' : 'p-0'}`}>
+    <div className={`${isMobile ? 'h-full flex flex-col overflow-y-auto' : 'p-0'}`}>
       {!isMobile ? (
         <div className="p-2.5 space-y-0.5">
           <h3 className="px-2 text-xs font-medium text-muted-foreground mb-1.5">Navigation</h3>
@@ -346,9 +358,9 @@ export default function Navbar() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col h-full p-6">
+        <div className="flex flex-col h-full p-6 pb-8 max-h-screen overflow-y-auto">
           {/* Website Name */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 flex-shrink-0">
             <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 mb-2">
               Thy • Richfield <span className="text-3xl">👑</span>
             </h1>
@@ -356,7 +368,7 @@ export default function Navbar() {
           </div>
           
           {/* Navigation Links */}
-          <div className="space-y-2">
+          <div className="space-y-2 mb-6 flex-shrink-0">
             {allNavItems.map((item) => {
               // Determine if this nav item is active
               let isActive = false;
@@ -432,30 +444,54 @@ export default function Navbar() {
           </div>
           
           {/* Social Media */}
-          <div className="mt-6 mb-6">
-            <h3 className="text-sm font-medium text-muted-foreground mb-4">Connect with me</h3>
+          <div className="mb-6 flex-shrink-0">
+            <h3 className="text-sm font-medium text-muted-foreground mb-3">Connect with me</h3>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { label: "WhatsApp", icon: MessageCircle, color: "text-green-500" },
-                { label: "Email", icon: Mail, color: "text-blue-500" },
-                { label: "X (Twitter)", icon: Twitter, color: "text-foreground" },
-                { label: "Instagram", icon: Instagram, color: "text-pink-500" }
+                { 
+                  label: "WhatsApp", 
+                  icon: MessageCircle, 
+                  color: "text-green-500",
+                  href: "https://wa.me/+2347052915729"
+                },
+                { 
+                  label: "Email", 
+                  icon: Mail, 
+                  color: "text-blue-500",
+                  href: "mailto:samsonrichfield@gmail.com"
+                },
+                { 
+                  label: "X (Twitter)", 
+                  icon: Twitter, 
+                  color: "text-foreground",
+                  href: "https://x.com/samsonrichfiel1?t=DzF4TXHtbsiEJoOmylWYwg&s=09"
+                },
+                { 
+                  label: "Instagram", 
+                  icon: Instagram, 
+                  color: "text-pink-500",
+                  href: "https://www.instagram.com/thy._.ricchiee/"
+                }
               ].map((social) => (
-                <button
+                <a
                   key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-3 rounded-lg border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 text-center group"
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   <div className={`text-lg mb-1 ${social.color} group-hover:scale-110 transition-transform duration-200`}>
                     <social.icon className="w-5 h-5 mx-auto" />
                   </div>
                   <p className="text-xs text-muted-foreground">{social.label}</p>
-                </button>
+                </a>
               ))}
             </div>
           </div>
           
           {/* Projects Button with Multi-color Glow */}
-          <div className="mt-auto mb-4 relative">
+          <div className="mb-4 relative flex-shrink-0">
             <div 
               className="absolute -inset-1 rounded-xl opacity-75 blur animate-pulse"
               style={{
@@ -484,7 +520,7 @@ export default function Navbar() {
           </div>
 
           {/* Contact CTA */}
-          <div>
+          <div className="flex-shrink-0">
             <Button 
               className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
               onClick={() => {
@@ -511,6 +547,10 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border/50">
+      {/* Hidden prefetch links for instant navigation */}
+      <Link href="/" prefetch={true} className="hidden" />
+      <Link href="/projects" prefetch={true} className="hidden" />
+      
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
@@ -731,7 +771,7 @@ export default function Navbar() {
                 <Menu className="w-4 h-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 p-0">
+            <SheetContent side="right" className="w-80 p-0 overflow-y-auto max-h-screen">
               <SheetHeader className="sr-only">
                 <SheetTitle>Navigation Menu</SheetTitle>
               </SheetHeader>

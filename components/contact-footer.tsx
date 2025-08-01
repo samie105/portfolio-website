@@ -100,28 +100,28 @@ export default function ContactFooter() {
       icon: MessageCircle, 
       color: "text-green-500 hover:text-green-400",
       bgColor: "hover:bg-green-500/10",
-      href: "#" 
+      href: "https://wa.me/+2347052915729" 
     },
     { 
       name: "Email", 
       icon: Mail, 
       color: "text-blue-500 hover:text-blue-400",
       bgColor: "hover:bg-blue-500/10",
-      href: "mailto:your-email@example.com" 
+      href: "mailto:samsonrichfield@gmail.com" 
     },
     { 
       name: "Instagram", 
       icon: Instagram, 
       color: "text-pink-500 hover:text-pink-400",
       bgColor: "hover:bg-pink-500/10",
-      href: "#" 
+      href: "https://www.instagram.com/thy._.ricchiee/" 
     },
     { 
       name: "X", 
       icon: XIcon, 
       color: "text-foreground hover:text-foreground/80",
       bgColor: "hover:bg-foreground/10",
-      href: "#" 
+      href: "https://x.com/samsonrichfiel1?t=DzF4TXHtbsiEJoOmylWYwg&s=09" 
     }
   ];
 

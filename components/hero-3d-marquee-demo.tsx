@@ -5,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { FlipWords } from "@/components/ui/flip-words";
 import { Sparkles, Code, LayoutGrid } from "lucide-react";
 import { motion } from "motion/react";
+import { useShouldAnimate } from "@/hooks/use-motion-props";
 
 export default function Hero3DMarqueeDemo() {
+  const shouldAnimate = useShouldAnimate();
+  
   const images = [
     "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
     "https://assets.aceternity.com/animated-modal.png",
@@ -117,18 +120,18 @@ export default function Hero3DMarqueeDemo() {
       <motion.button
         onClick={scrollToNextSection}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        animate={shouldAnimate ? { opacity: 1 } : { opacity: 1 }}
+        transition={shouldAnimate ? { duration: 1, delay: 1.5 } : { duration: 0 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer hover:scale-110 transition-transform duration-300 group"
       >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          animate={shouldAnimate ? { y: [0, 8, 0] } : { y: 0 }}
+          transition={shouldAnimate ? { duration: 2, repeat: Infinity } : { duration: 0 }}
           className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center group-hover:border-white/50 bg-black/20 backdrop-blur-sm"
         >
           <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            animate={shouldAnimate ? { y: [0, 12, 0] } : { y: 0 }}
+            transition={shouldAnimate ? { duration: 2, repeat: Infinity } : { duration: 0 }}
             className="w-1 h-3 bg-white rounded-full mt-2 group-hover:bg-white/80"
           />
         </motion.div>

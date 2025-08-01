@@ -236,3 +236,69 @@
     opacity: 0.9;
   }
 }
+
+/* Page Transition Styles */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Additional navbar fixes */
+nav {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Ensure navbar is always visible during animations */
+.page-transitioning nav {
+  z-index: 9999 !important;
+  position: fixed !important;
+}
+
+/* Mobile menu scrolling improvements */
+[data-radix-scroll-area-viewport] {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+}
+
+[data-radix-scroll-area-viewport]::-webkit-scrollbar {
+  width: 6px;
+}
+
+[data-radix-scroll-area-viewport]::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
+/* Pause heavy CSS animations during page transitions */
+.page-transitioning * {
+  animation-play-state: paused !important;
+  transition-duration: 0s !important;
+}
+
+.page-transitioning .animate-pulse,
+.page-transitioning .animate-spin,
+.page-transitioning .animate-bounce {
+  animation: none !important;
+}
+
+/* Smooth scrolling and better performance for page transitions */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Improve page transition performance */
+[data-framer-component-type="motion.div"] {
+  will-change: transform;
+  transform: translateZ(0);
+}
+

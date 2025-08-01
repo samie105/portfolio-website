@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useShouldAnimate } from "@/hooks/use-motion-props";
 
 export const ThreeDMarquee = ({
   images,
@@ -10,6 +11,8 @@ export const ThreeDMarquee = ({
   images: string[];
   className?: string;
 }) => {
+  const shouldAnimate = useShouldAnimate();
+  
   // Split the images array into 4 equal parts
   const chunkSize = Math.ceil(images.length / 4);
   const chunks = Array.from({ length: 4 }, (_, colIndex) => {
@@ -33,12 +36,12 @@ export const ThreeDMarquee = ({
           >
             {chunks.map((subarray, colIndex) => (
               <motion.div
-                animate={{ y: colIndex % 2 === 0 ? 100 : -100 }}
-                transition={{
+                animate={shouldAnimate ? { y: colIndex % 2 === 0 ? 100 : -100 } : { y: 0 }}
+                transition={shouldAnimate ? {
                   duration: colIndex % 2 === 0 ? 10 : 15,
                   repeat: Infinity,
                   repeatType: "reverse",
-                }}
+                } : { duration: 0 }}
                 key={colIndex + "marquee"}
                 className="flex flex-col items-start gap-8"
               >
@@ -47,13 +50,13 @@ export const ThreeDMarquee = ({
                   <div className="relative" key={imageIndex + image}>
                     <GridLineHorizontal className="-top-4" offset="20px" />
                     <motion.img
-                      whileHover={{
+                      whileHover={shouldAnimate ? {
                         y: -10,
-                      }}
-                      transition={{
+                      } : {}}
+                      transition={shouldAnimate ? {
                         duration: 0.3,
                         ease: "easeInOut",
-                      }}
+                      } : { duration: 0 }}
                       key={imageIndex + image}
                       src={image}
                       alt={`Image ${imageIndex + 1}`}
