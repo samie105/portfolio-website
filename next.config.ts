@@ -81,7 +81,7 @@ const nextConfig: NextConfig = {
   
   // Experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    // optimizeCss: true, // Disabled due to critters dependency issue in Next.js 15
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 };

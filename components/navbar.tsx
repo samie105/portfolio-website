@@ -358,187 +358,193 @@ export default function Navbar() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col h-full p-6 pb-8 max-h-screen overflow-y-auto">
-          {/* Website Name */}
-          <div className="text-center mb-6 flex-shrink-0">
-            <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 mb-2">
-              Thy • Richfield <span className="text-3xl">👑</span>
-            </h1>
-            <p className="text-sm text-muted-foreground">Full-Stack Developer & Designer</p>
-          </div>
-          
-          {/* Navigation Links */}
-          <div className="space-y-2 mb-6 flex-shrink-0">
-            {allNavItems.map((item) => {
-              // Determine if this nav item is active
-              let isActive = false;
-              if (item.href) {
-                // For Home page
-                if (item.id === 'home') {
-                  isActive = pathname === '/' && (!currentHash);
+        <div className="flex flex-col h-full p-6 pb-4">
+          {/* Scrollable Content */}
+          <div className="flex-1 overflow-y-auto pb-4">
+            {/* Website Name */}
+            <div className="text-center mb-6 flex-shrink-0">
+              <h1 className="text-2xl font-bold text-foreground flex items-center justify-center gap-2 mb-2">
+                Thy • Richfield <span className="text-3xl">👑</span>
+              </h1>
+              <p className="text-sm text-muted-foreground">Full-Stack Developer & Designer</p>
+            </div>
+            
+            {/* Navigation Links */}
+            <div className="space-y-2 mb-6 flex-shrink-0">
+              {allNavItems.map((item) => {
+                // Determine if this nav item is active
+                let isActive = false;
+                if (item.href) {
+                  // For Home page
+                  if (item.id === 'home') {
+                    isActive = pathname === '/' && (!currentHash);
+                  } else {
+                    // For other routes
+                    isActive = pathname === item.href;
+                  }
                 } else {
-                  // For other routes
-                  isActive = pathname === item.href;
+                  // For sections on homepage - only active if hash matches
+                  isActive = pathname === '/' && currentHash === item.id;
                 }
-              } else {
-                // For sections on homepage - only active if hash matches
-                isActive = pathname === '/' && currentHash === item.id;
-              }
-              
-              if (item.href) {
-                // For routes like Home, use MobileSmoothLink component
-                return (
-                  <MobileSmoothLink key={item.id} href={item.href}>
-                    <button
-                      className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left group ${
-                        isActive
-                          ? 'bg-card border border-border/30 shadow-sm'
-                          : 'hover:bg-accent'
-                      }`}
-                    >
-                      <div>
-                        <div className={`font-medium ${
-                          isActive ? 'text-foreground' : 'text-foreground'
-                        }`}>{item.label}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {item.id === 'home' && 'Back to homepage'}
-                          {item.id === 'projects' && 'View my work'}
-                          {item.id === 'tools' && 'Explore my toolkit'}
-                          {item.id === 'about' && 'My professional journey'}
-                          {item.id === 'approach' && 'My ideas & approach'}
-                          {item.id === 'contact' && 'Get in touch'}
+                
+                if (item.href) {
+                  // For routes like Home, use MobileSmoothLink component
+                  return (
+                    <MobileSmoothLink key={item.id} href={item.href}>
+                      <button
+                        className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left group ${
+                          isActive
+                            ? 'bg-card border border-border/30 shadow-sm'
+                            : 'hover:bg-accent'
+                        }`}
+                      >
+                        <div>
+                          <div className={`font-medium ${
+                            isActive ? 'text-foreground' : 'text-foreground'
+                          }`}>{item.label}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {item.id === 'home' && 'Back to homepage'}
+                            {item.id === 'projects' && 'View my work'}
+                            {item.id === 'tools' && 'Explore my toolkit'}
+                            {item.id === 'about' && 'My professional journey'}
+                            {item.id === 'approach' && 'My ideas & approach'}
+                            {item.id === 'contact' && 'Get in touch'}
+                          </div>
                         </div>
-                      </div>
-                    </button>
-                  </MobileSmoothLink>
-                );
-              } else {
-                // For sections, use MobileSmoothLink component with hash
-                return (
-                  <MobileSmoothLink key={item.id} href={`/#${item.id}`}>
-                    <button
-                      className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left group ${
-                        isActive
-                          ? 'bg-card border border-border/30 shadow-sm'
-                          : 'hover:bg-accent'
-                      }`}
-                    >
-                      <div>
-                        <div className={`font-medium ${
-                          isActive ? 'text-foreground' : 'text-foreground'
-                        }`}>{item.label}</div>
-                        <div className="text-sm text-muted-foreground">
-                          {item.id === 'home' && 'Back to homepage'}
-                          {item.id === 'projects' && 'View my work'}
-                          {item.id === 'tools' && 'Explore my toolkit'}
-                          {item.id === 'about' && 'My professional journey'}
-                          {item.id === 'approach' && 'My ideas & approach'}
-                          {item.id === 'contact' && 'Get in touch'}
+                      </button>
+                    </MobileSmoothLink>
+                  );
+                } else {
+                  // For sections, use MobileSmoothLink component with hash
+                  return (
+                    <MobileSmoothLink key={item.id} href={`/#${item.id}`}>
+                      <button
+                        className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left group ${
+                          isActive
+                            ? 'bg-card border border-border/30 shadow-sm'
+                            : 'hover:bg-accent'
+                        }`}
+                      >
+                        <div>
+                          <div className={`font-medium ${
+                            isActive ? 'text-foreground' : 'text-foreground'
+                          }`}>{item.label}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {item.id === 'home' && 'Back to homepage'}
+                            {item.id === 'projects' && 'View my work'}
+                            {item.id === 'tools' && 'Explore my toolkit'}
+                            {item.id === 'about' && 'My professional journey'}
+                            {item.id === 'approach' && 'My ideas & approach'}
+                            {item.id === 'contact' && 'Get in touch'}
+                          </div>
                         </div>
-                      </div>
-                    </button>
-                  </MobileSmoothLink>
-                );
-              }
-            })}
-          </div>
-          
-          {/* Social Media */}
-          <div className="mb-6 flex-shrink-0">
-            <h3 className="text-sm font-medium text-muted-foreground mb-3">Connect with me</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { 
-                  label: "WhatsApp", 
-                  icon: MessageCircle, 
-                  color: "text-green-500",
-                  href: "https://wa.me/+2347052915729"
-                },
-                { 
-                  label: "Email", 
-                  icon: Mail, 
-                  color: "text-blue-500",
-                  href: "mailto:samsonrichfield@gmail.com"
-                },
-                { 
-                  label: "X (Twitter)", 
-                  icon: Twitter, 
-                  color: "text-foreground",
-                  href: "https://x.com/samsonrichfiel1?t=DzF4TXHtbsiEJoOmylWYwg&s=09"
-                },
-                { 
-                  label: "Instagram", 
-                  icon: Instagram, 
-                  color: "text-pink-500",
-                  href: "https://www.instagram.com/thy._.ricchiee/"
+                      </button>
+                    </MobileSmoothLink>
+                  );
                 }
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 rounded-lg border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 text-center group"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <div className={`text-lg mb-1 ${social.color} group-hover:scale-110 transition-transform duration-200`}>
-                    <social.icon className="w-5 h-5 mx-auto" />
-                  </div>
-                  <p className="text-xs text-muted-foreground">{social.label}</p>
-                </a>
-              ))}
+              })}
+            </div>
+            
+            {/* Social Media */}
+            <div className="mb-6 flex-shrink-0">
+              <h3 className="text-sm font-medium text-muted-foreground mb-3">Connect with me</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { 
+                    label: "WhatsApp", 
+                    icon: MessageCircle, 
+                    color: "text-green-500",
+                    href: "https://wa.me/+2347052915729"
+                  },
+                  { 
+                    label: "Email", 
+                    icon: Mail, 
+                    color: "text-blue-500",
+                    href: "mailto:samsonrichfield@gmail.com"
+                  },
+                  { 
+                    label: "X (Twitter)", 
+                    icon: Twitter, 
+                    color: "text-foreground",
+                    href: "https://x.com/samsonrichfiel1?t=DzF4TXHtbsiEJoOmylWYwg&s=09"
+                  },
+                  { 
+                    label: "Instagram", 
+                    icon: Instagram, 
+                    color: "text-pink-500",
+                    href: "https://www.instagram.com/thy._.ricchiee/"
+                  }
+                ].map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-lg border border-border/40 hover:border-primary/50 hover:bg-primary/5 transition-all duration-200 text-center group"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <div className={`text-lg mb-1 ${social.color} group-hover:scale-110 transition-transform duration-200`}>
+                      <social.icon className="w-5 h-5 mx-auto" />
+                    </div>
+                    <p className="text-xs text-muted-foreground">{social.label}</p>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
           
-          {/* Projects Button with Multi-color Glow */}
-          <div className="mb-4 relative flex-shrink-0">
-            <div 
-              className="absolute -inset-1 rounded-xl opacity-75 blur animate-pulse"
-              style={{
-                background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff)',
-                backgroundSize: '400% 400%',
-                animation: 'gradientShift 3s ease infinite, pulse 2s ease-in-out infinite alternate'
-              }}
-            ></div>
-            <div 
-              className="absolute -inset-0.5 rounded-xl opacity-50 blur-sm"
-              style={{
-                background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-                backgroundSize: '400% 400%',
-                animation: 'gradientShift 4s ease infinite reverse'
-              }}
-            ></div>
-            <Button 
-              onClick={() => {
-                setMobileMenuOpen(false);
-                navigateWithTransition("/projects");
-              }}
-              className="relative w-full h-12 rounded-xl bg-card hover:bg-card/80 text-foreground border border-border/50 font-medium transition-all duration-300 hover:scale-105 z-10"
-            >
-              Projects
-            </Button>
-          </div>
+          {/* Fixed Bottom CTAs */}
+          <div className="flex-shrink-0 space-y-3 pt-4 border-t border-border/30">
+            {/* Projects Button with Multi-color Glow */}
+            <div className="relative">
+              <div 
+                className="absolute -inset-1 rounded-xl opacity-75 blur animate-pulse"
+                style={{
+                  background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff)',
+                  backgroundSize: '400% 400%',
+                  animation: 'gradientShift 3s ease infinite, pulse 2s ease-in-out infinite alternate'
+                }}
+              ></div>
+              <div 
+                className="absolute -inset-0.5 rounded-xl opacity-50 blur-sm"
+                style={{
+                  background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+                  backgroundSize: '400% 400%',
+                  animation: 'gradientShift 4s ease infinite reverse'
+                }}
+              ></div>
+              <Button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  navigateWithTransition("/projects");
+                }}
+                className="relative w-full h-12 rounded-xl bg-card hover:bg-card/80 text-foreground border border-border/50 font-medium transition-all duration-300 hover:scale-105 z-10"
+              >
+                Projects
+              </Button>
+            </div>
 
-          {/* Contact CTA */}
-          <div className="flex-shrink-0">
-            <Button 
-              className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-              onClick={() => {
-                setMobileMenuOpen(false); // Close mobile menu
-                if (pathname === '/') {
-                  // If on homepage, scroll to contact section
-                  scrollToSection('contact');
-                  window.history.pushState(null, '', '#contact');
-                  setCurrentHash('contact');
-                } else {
-                  // If on other page, navigate to homepage with contact hash
-                  navigateWithTransition('/#contact');
-                }
-              }}
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              Contact Me
-            </Button>
+            {/* Contact CTA */}
+            <div>
+              <Button 
+                className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+                onClick={() => {
+                  setMobileMenuOpen(false); // Close mobile menu
+                  if (pathname === '/') {
+                    // If on homepage, scroll to contact section
+                    scrollToSection('contact');
+                    window.history.pushState(null, '', '#contact');
+                    setCurrentHash('contact');
+                  } else {
+                    // If on other page, navigate to homepage with contact hash
+                    navigateWithTransition('/#contact');
+                  }
+                }}
+              >
+                <Phone className="w-4 h-4 mr-2" />
+                Contact Me
+              </Button>
+            </div>
           </div>
         </div>
       )}
@@ -546,7 +552,16 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-b border-border/50">
+    <nav 
+      className="fixed top-0 left-0 right-0 z-[9999] bg-background/95 backdrop-blur-xl border-b border-border/50"
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999
+      }}
+    >
       {/* Hidden prefetch links for instant navigation */}
       <Link href="/" prefetch={true} className="hidden" />
       <Link href="/projects" prefetch={true} className="hidden" />
@@ -771,7 +786,7 @@ export default function Navbar() {
                 <Menu className="w-4 h-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80 p-0 overflow-y-auto max-h-screen">
+            <SheetContent side="right" className="w-80 p-0 max-h-screen">
               <SheetHeader className="sr-only">
                 <SheetTitle>Navigation Menu</SheetTitle>
               </SheetHeader>

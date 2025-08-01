@@ -9,7 +9,6 @@ import PageTransition from "@/components/page-transition";
 import { Toaster } from "@/components/ui/sonner";
 import { CookieConsent } from "@/components/cookie-consent";
 import StructuredData from "@/components/structured-data";
-import Analytics from "@/components/analytics";
 import Link from "next/link";
 
 const geistSans = Geist({
@@ -124,11 +123,10 @@ export default function RootLayout({
               <Link href="/" prefetch={true} className="hidden" />
               <Link href="/projects" prefetch={true} className="hidden" />
               
-              {/* Navbar stays outside PageTransition to remain fixed */}
-             
+              {/* Navbar stays outside any relative containers to remain truly fixed */}
+              <Navbar />
               
               <div className="relative min-h-screen">
-            <Navbar />
                 <PageTransition>
                   <main>
                     {children}
@@ -140,7 +138,6 @@ export default function RootLayout({
             </AnimationProvider>
           </ColorProvider>
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   );
