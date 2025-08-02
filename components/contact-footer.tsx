@@ -144,7 +144,7 @@ export default function ContactFooter() {
             </div>
             
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-              You like what you see?
+          {" Let's Build Together"}
             </h2>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -227,7 +227,7 @@ export default function ContactFooter() {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="john@example.com"
+                    placeholder="you@example.them"
                     className="h-12 rounded-xl bg-background/50 border-border/50 focus:border-primary transition-colors"
                     required
                   />
@@ -235,7 +235,7 @@ export default function ContactFooter() {
 
                 <div className="space-y-2">
                   <Label htmlFor="message" className="text-sm font-medium">
-                    Tell me about your project
+                   Leave me a message
                   </Label>
                   <VanishingTextarea
                     id="message"

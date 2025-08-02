@@ -3,9 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ColorProvider } from "@/components/color-provider";
-import { AnimationProvider } from "@/contexts/animation-context";
 import Navbar from "@/components/navbar";
-import PageTransition from "@/components/page-transition";
 import { Toaster } from "@/components/ui/sonner";
 import { CookieConsent } from "@/components/cookie-consent";
 import StructuredData from "@/components/structured-data";
@@ -86,11 +84,7 @@ export const metadata: Metadata = {
     images: ["/og-image.jpg"],
     creator: "@samsonrichfiel1",
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
-  },
+
   alternates: {
     canonical: "https://thyrichfield.me",
   },
@@ -113,29 +107,29 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-        //  enableSystem
+          enableSystem
           disableTransitionOnChange
           storageKey="portfolio-theme"
         >
           <ColorProvider>
-            <AnimationProvider>
+      
               {/* Hidden prefetch links for better performance */}
               <Link href="/" prefetch={true} className="hidden" />
               <Link href="/projects" prefetch={true} className="hidden" />
               
               {/* Navbar stays outside any relative containers to remain truly fixed */}
-              <Navbar />
               
-              <div className="relative min-h-screen">
-                <PageTransition>
+
+              <Navbar />
+          
                   <main>
                     {children}
                   </main>
-                </PageTransition>
-              </div>
+    
+      
               <Toaster />
               <CookieConsent />
-            </AnimationProvider>
+         
           </ColorProvider>
         </ThemeProvider>
       </body>

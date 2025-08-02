@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { usePageTransition } from "@/hooks/use-page-transition";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -28,7 +27,6 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { currentColor, setColor, colors, getDisplayColor } = useColor();
   const pathname = usePathname();
-  const { navigateWithTransition } = usePageTransition();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeSection, setActiveSection] = useState("home");
   const [currentHash, setCurrentHash] = useState("");
@@ -63,15 +61,7 @@ export default function Navbar() {
       setMobileMenuOpen(false);
       
       // Handle different navigation types
-      if (href === "/projects") {
-        // Only use page transition when coming from projects page
-        if (pathname === '/projects') {
-          e.preventDefault();
-          navigateWithTransition("/projects");
-        }
-        // When on home page, use normal navigation (no transition)
-      }
-      else if (href.startsWith('/#') && pathname === '/') {
+      if (href.startsWith('/#') && pathname === '/') {
         e.preventDefault();
         const sectionId = href.slice(2); // Remove /#
         scrollToSection(sectionId);
@@ -84,11 +74,6 @@ export default function Navbar() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         window.history.pushState(null, '', '/');
         setCurrentHash('');
-      }
-      // If it's home page and we're on projects, use page transition
-      else if (href === '/' && pathname === '/projects') {
-        e.preventDefault();
-        navigateWithTransition('/');
       }
     };
 
@@ -102,17 +87,8 @@ export default function Navbar() {
   // Custom Link component that handles smooth scrolling for hash links
   const SmoothLink = ({ href, children, className }: { href: string, children: React.ReactNode, className?: string }) => {
     const handleClick = (e: React.MouseEvent) => {
-      // Handle navigation to projects page
-      if (href === "/projects") {
-        // Only use page transition when coming from projects page
-        if (pathname === '/projects') {
-          e.preventDefault();
-          navigateWithTransition("/projects");
-        }
-        // When on home page, use normal navigation (no transition)
-      }
       // If it's a hash link and we're on the homepage, smooth scroll instead of navigating
-      else if (href.startsWith('/#') && pathname === '/') {
+      if (href.startsWith('/#') && pathname === '/') {
         e.preventDefault();
         const sectionId = href.slice(2); // Remove /#
         scrollToSection(sectionId);
@@ -125,11 +101,6 @@ export default function Navbar() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         window.history.pushState(null, '', '/');
         setCurrentHash('');
-      }
-      // If it's home page and we're on projects page, use page transition
-      else if (href === '/' && pathname === '/projects') {
-        e.preventDefault();
-        navigateWithTransition('/');
       }
     };
 
@@ -513,37 +484,41 @@ export default function Navbar() {
                   animation: 'gradientShift 4s ease infinite reverse'
                 }}
               ></div>
-              <Button 
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  navigateWithTransition("/projects");
-                }}
-                className="relative w-full h-12 rounded-xl bg-card hover:bg-card/80 text-foreground border border-border/50 font-medium transition-all duration-300 hover:scale-105 z-10"
+              <Link 
+                href="/projects"
+                onClick={() => setMobileMenuOpen(false)}
+                className="relative w-full h-12 text-sm rounded-xl bg-card hover:bg-card/80 text-foreground border border-border/50 font-medium transition-all duration-300 hover:scale-105 z-10 flex items-center justify-center"
               >
                 Projects
-              </Button>
+              </Link>
             </div>
 
             {/* Contact CTA */}
             <div>
-              <Button 
-                className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-                onClick={() => {
-                  setMobileMenuOpen(false); // Close mobile menu
-                  if (pathname === '/') {
+              {pathname === '/' ? (
+                <Button 
+                  className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
+                  onClick={() => {
+                    setMobileMenuOpen(false); // Close mobile menu
                     // If on homepage, scroll to contact section
                     scrollToSection('contact');
                     window.history.pushState(null, '', '#contact');
                     setCurrentHash('contact');
-                  } else {
-                    // If on other page, navigate to homepage with contact hash
-                    navigateWithTransition('/#contact');
-                  }
-                }}
-              >
-                <Phone className="w-4 h-4 mr-2" />
-                Contact Me
-              </Button>
+                  }}
+                >
+                  <Phone className="w-4 h-4 mr-2" />
+                  Contact Me
+                </Button>
+              ) : (
+                <Link 
+                  href="/#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-medium flex items-center justify-center"
+                >
+                  <Phone className="w-4 h-4 mr-2" />
+                  Contact Me
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -552,16 +527,10 @@ export default function Navbar() {
   );
 
   return (
-    <nav 
-      className="fixed top-0 left-0 right-0 z-[9999] bg-background/95 backdrop-blur-xl border-b border-border/50"
-      style={{ 
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 9999
-      }}
-    >
+      <nav 
+        className="fixed top-0 z-50 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50 w-full"
+      
+      >
       {/* Hidden prefetch links for instant navigation */}
       <Link href="/" prefetch={true} className="hidden" />
       <Link href="/projects" prefetch={true} className="hidden" />
@@ -691,32 +660,36 @@ export default function Navbar() {
                 animation: 'gradientShift 4s ease infinite reverse'
               }}
             ></div>
-            <Button 
-              onClick={() => navigateWithTransition("/projects")}
-              className="relative bg-card hover:bg-card/80 text-foreground border border-border/50 rounded-full px-6 py-2 font-medium transition-all duration-300 hover:scale-105 z-10"
+            <Link 
+              href="/projects"
+              className="relative text-sm bg-card hover:bg-card/80 text-foreground border border-border/50 rounded-full px-6 py-2 font-medium transition-all duration-300 hover:scale-105 z-10 flex items-center"
             >
               Projects
-            </Button>
+            </Link>
           </div>
 
           {/* CTA Button */}
-          <Button 
-            size="default" 
-            className="p-2 rounded-full"
-            onClick={() => {
-              if (pathname === '/') {
+          {pathname === '/' ? (
+            <Button 
+              size="default" 
+              className="p-2 rounded-full"
+              onClick={() => {
                 // If on homepage, scroll to contact section
                 scrollToSection('contact');
                 window.history.pushState(null, '', '#contact');
                 setCurrentHash('contact');
-              } else {
-                // If on other page, navigate to homepage with contact hash
-                navigateWithTransition('/#contact');
-              }
-            }}
-          >
-            Get in touch<ArrowRight className="w-4 h-4" />
-          </Button>
+              }}
+            >
+              Get in touch<ArrowRight className="w-4 h-4" />
+            </Button>
+          ) : (
+            <Link 
+              href="/#contact"
+              className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 p-2 rounded-full"
+            >
+              Get in touch<ArrowRight className="w-4 h-4" />
+            </Link>
+          )}
 
           {/* Theme Switch - Popover on Desktop */}
           <Popover>
@@ -796,5 +769,6 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
+  
   );
 }
