@@ -82,7 +82,7 @@ export default function Hero3DMarqueeDemo() {
           <div className="mb-6 animate-in slide-in-from-top-4 duration-1000 delay-200">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white border border-white/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <Sparkles className="w-4 h-4 animate-pulse" />
-              Available for hire
+              Open for jobs
             </span>
           </div>
           
