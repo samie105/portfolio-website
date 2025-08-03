@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export const ThreeDMarquee = ({
   images,
@@ -17,6 +18,7 @@ export const ThreeDMarquee = ({
     const start = colIndex * chunkSize;
     return images.slice(start, start + chunkSize);
   });
+  
   return (
     <div
       className={cn(
@@ -44,26 +46,39 @@ export const ThreeDMarquee = ({
                 className="flex flex-col items-start gap-8"
               >
                 <GridLineVertical className="-left-4" offset="80px" />
-                {subarray.map((image, imageIndex) => (
-                  <div className="relative" key={imageIndex + image}>
-                    <GridLineHorizontal className="-top-4" offset="20px" />
-                    <motion.img
-                      whileHover={{
-                        y: -10,
-                      }}
-                      transition={{
-                        duration: 0.3,
-                        ease: "easeInOut",
-                      }}
-                      key={imageIndex + image}
-                      src={image}
-                      alt={`Image ${imageIndex + 1}`}
-                      className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl"
-                      width={970}
-                      height={700}
-                    />
-                  </div>
-                ))}
+                {subarray.map((image, imageIndex) => {
+                  // Calculate global index for priority loading
+                  const globalIndex = colIndex * chunkSize + imageIndex;
+                  
+                  return (
+                    <div className="relative" key={imageIndex + image}>
+                      <GridLineHorizontal className="-top-4" offset="20px" />
+                      <motion.div
+                        whileHover={{
+                          y: -10,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                          ease: "easeInOut",
+                        }}
+                        className="rounded-lg overflow-hidden"
+                      >
+                        <Image
+                          src={image}
+                          alt={`Portfolio project ${globalIndex + 1}`}
+                          width={970}
+                          height={700}
+                          priority={globalIndex < 4} // Load first 4 images with priority
+                          quality={75} // Reduce quality for faster loading
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="aspect-[970/700] rounded-lg object-cover ring ring-gray-950/5 hover:shadow-2xl transition-all duration-300"
+                        />
+                      </motion.div>
+                    </div>
+                  );
+                })}
               </motion.div>
             ))}
           </div>
