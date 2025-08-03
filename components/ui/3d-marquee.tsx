@@ -67,6 +67,7 @@ export const ThreeDMarquee = ({
                           src={image}
                           alt={`Portfolio project ${globalIndex + 1}`}
                           width={970}
+                        //  loading="lazy"
                           height={700}
                           priority={globalIndex < 4} // Load first 4 images with priority
                           quality={75} // Reduce quality for faster loading

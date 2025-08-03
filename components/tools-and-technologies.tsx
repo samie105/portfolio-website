@@ -217,42 +217,42 @@ export default function ToolsAndTechnologies() {
                 <div className="grid grid-cols-6 gap-3 w-full max-w-2xl">
                   {/* Row 1 */}
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/reactjs.svg" alt="React" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/reactjs.svg" alt="React" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/nextjs.svg" alt="Next.js" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/nextjs.svg" alt="Next.js" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/typescript.svg" alt="TypeScript" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/typescript.svg" alt="TypeScript" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/javascript.svg" alt="JavaScript" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/javascript.svg" alt="JavaScript" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/nodejs.svg" alt="Node.js" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/nodejs.svg" alt="Node.js" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/expo.svg" alt="Expo" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/expo.svg" alt="Expo" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
 
                   {/* Row 2 */}
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/supabase.svg" alt="Supabase" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/supabase.svg" alt="Supabase" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/mongodb.svg" alt="MongoDB" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/mongodb.svg" alt="MongoDB" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/prisma.svg" alt="Prisma" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/prisma.svg" alt="Prisma" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-1 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/aws.svg" alt="AWS" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/aws.svg" alt="AWS" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/tailwind.svg" alt="Tailwind CSS" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/tailwind.svg" alt="Tailwind CSS" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <div className="group w-full aspect-square bg-muted/50 backdrop-blur-sm rounded-xl p-2.5 border border-border hover:scale-110 hover:-rotate-2 transition-all duration-300 hover:shadow-lg hover:border-primary/30">
-                    <Image src="/tech-stack/figma.svg" alt="Figma" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
+                    <img src="/tech-stack/figma.svg" alt="Figma" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" />
                   </div>
                 </div>
               </div>
