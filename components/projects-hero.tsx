@@ -8,6 +8,31 @@ import {
 import { Button } from "@/components/ui/button";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
+
+// Subtle diagonal grid background that fills the hero
+const HeroGridLines = () => {
+  return (
+    <div
+      aria-hidden
+      className={
+        [
+          "pointer-events-none absolute inset-0 z-10",
+          // Use currentColor so we can flip black/white in light/dark
+          "text-black dark:text-white",
+          // Very low visibility so it doesn't block text
+          "opacity-[0.10]",
+          // Two diagonal tiling gradients to form an X grid pattern
+          "bg-[linear-gradient(45deg,currentColor_1px,transparent_1px),linear-gradient(-45deg,currentColor_1px,transparent_1px)]",
+          // Tile size roughly matching provided SVG spacing (54px)
+          "[background-size:54px_54px]",
+          // Ensure repeat and cover entire area
+          "[background-repeat:repeat]",
+        ].join(" ")
+      }
+    />
+  );
+};
+
 export default function ProjectsHero() {
   const scrollToProjects = () => {
     const element = document.getElementById("projects-section");
@@ -23,8 +48,10 @@ export default function ProjectsHero() {
 
   return (
     <section id="projects-hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <BackgroundBeamsWithCollision className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+      {/* Existing beams effect (base layer) */}
+      <BackgroundBeamsWithCollision className="relative z-0 min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        {/* Content */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 text-center">
           {/* Floating Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -47,60 +74,63 @@ export default function ProjectsHero() {
             <span className="text-primary block">Captivates</span>
           </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-geist"
-        >
-          Step into my digital playground where wild ideas transform into 
-          <span className="text-primary font-medium"> stunning realities</span>. 
-          Each project tells a story of 
-          <span className="text-primary font-medium"> innovation</span>, 
-          <span className="text-primary font-medium"> creativity</span>, and 
-          <span className="text-primary font-medium"> pure digital magic</span>.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-32"
-        >
-          <Button
-            onClick={scrollToProjects}
-            size="lg"
-            className="px-8 py-4 text-lg font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed font-geist"
           >
-            Let&apos;s Dive in
-            <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
-          </Button>
-        </motion.div>
-      </div>
-    </BackgroundBeamsWithCollision>
-    
-    {/* Scroll Indicator - Fixed at bottom of viewport */}
-    <motion.button
-      onClick={scrollToProjects}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 1.5 }}
-      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer hover:scale-110 transition-transform duration-300 group"
-    >
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center group-hover:border-primary/50 bg-background/80 backdrop-blur-sm"
+            Step into my digital playground where wild ideas transform into 
+            <span className="text-primary font-medium"> stunning realities</span>. 
+            Each project tells a story of 
+            <span className="text-primary font-medium"> innovation</span>, 
+            <span className="text-primary font-medium"> creativity</span>, and 
+            <span className="text-primary font-medium"> pure digital magic</span>.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-32"
+          >
+            <Button
+              onClick={scrollToProjects}
+              size="lg"
+              className="px-8 py-4 text-lg font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group"
+            >
+              Let&apos;s Dive in
+              <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
+            </Button>
+          </motion.div>
+        </div>
+      </BackgroundBeamsWithCollision>
+
+      {/* Grid lines layer spanning entire hero (under content) */}
+      <HeroGridLines />
+      
+      {/* Scroll Indicator - Fixed at bottom of viewport */}
+      <motion.button
+        onClick={scrollToProjects}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 cursor-pointer hover:scale-110 transition-transform duration-300 group"
       >
         <motion.div
-          animate={{ y: [0, 12, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-1 h-3 bg-primary rounded-full mt-2 group-hover:bg-primary/80"
-        />
-      </motion.div>
-    </motion.button>
-  </section>
+          className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center group-hover:border-primary/50 bg-background/80 backdrop-blur-sm"
+        >
+          <motion.div
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1 h-3 bg-primary rounded-full mt-2 group-hover:bg-primary/80"
+          />
+        </motion.div>
+      </motion.button>
+    </section>
   );
 }
